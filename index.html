@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Envelope Card</title>
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- Babel untuk support JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-gray-100">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const { useState } = React;
+
+      function EnvelopeCard() {
+        const [isOpen, setIsOpen] = useState(false);
+
+        const handleOpenEnvelope = () => setIsOpen(true);
+
+        return (
+          <div className="flex flex-col items-center justify-center min-h-screen bg-muted p-4">
+            <div
+              className="relative w-80 h-52 cursor-pointer transform transition-transform duration-300 hover:scale-105"
+              onClick={handleOpenEnvelope}
+            >
+              {/* Bagian depan */}
+              {!isOpen && (
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500 to-red-700 rounded-lg shadow-2xl border-2 border-red-300">
+                  <div className="h-3/4 bg-gradient-to-b from-red-400 to-red-600 rounded-t-lg flex items-center justify-center">
+                    <div className="text-white text-xl font-bold drop-shadow-lg tracking-wider">
+                      Untuk Dill
+                    </div>
+                  </div>
+                  <div className="h-1/4 bg-gradient-to-t from-red-100 to-red-200 rounded-b-lg border-t-2 border-red-300 flex items-center justify-center">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center shadow-md">
+                      ✉️
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-yellow-300 rounded-full animate-pulse" />
+                  </div>
+                </div>
+              )}
+
+              {/* Bagian isi */}
+              {isOpen && (
+                <div className="absolute inset-0 bg-gradient-to-br from-pink-100 to-red-100 rounded-lg shadow-2xl border-2 border-red-200 p-6 flex flex-col items-center justify-center">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-xl p-8 shadow-xl w-full text-center border-2 border-red-100">
+                    <div className="mb-6">
+                      <div className="w-16 h-1 bg-red-400 mx-auto mb-4 rounded-full" />
+                      <h2 className="text-3xl font-bold text-red-800 mb-4 font-serif tracking-wide">
+                        dill bagi owo gw bangkrut dill
+                      </h2>
+                      <div className="w-16 h-1 bg-red-400 mx-auto mt-4 rounded-full" />
+                    </div>
+                    <div className="flex justify-center space-x-2 mt-6">
+                      <div className="w-4 h-4 bg-yellow-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}} />
+                      <div className="w-4 h-4 bg-red-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}} />
+                      <div className="w-4 h-4 bg-pink-400 rounded-full animate-bounce" style={{animationDelay: '0.3s'}} />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {!isOpen && (
+              <p className="mt-6 text-red-700 text-lg font-medium animate-pulse">
+                ✨ Klik amplop untuk membuka kejutan! ✨
+              </p>
+            )}
+          </div>
+        );
+      }
+
+      ReactDOM.createRoot(document.getElementById("root")).render(<EnvelopeCard />);
+    </script>
+  </body>
+</html>
